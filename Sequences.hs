@@ -35,30 +35,43 @@ digitToInt x
 
 -- Returns the upper case character corresponding to the input.
 -- Uses guards by way of variety.
+-- Returns '0' if input is not a character
 toUpper :: Char -> Char
 toUpper x
-  = chr (ord x - 32)
+  | ord x >= 97 && ord x <= 122 = chr (ord x - 32)
+  | ord x >= 65 && ord x <= 90 = x
+  | otherwise = '0'
+
 
 --
 -- Sequences and series
 --
 
 -- Arithmetic sequence
+-- Parameters: a is the first term, d is the common difference, n is the term number
+-- Returns the nth term
 arithmeticSeq :: Double -> Double -> Int -> Double
-arithmeticSeq 
-  = undefined
+arithmeticSeq a d n
+  = fromIntegral n * d + a
 
 -- Geometric sequence
+-- Parameters: a is the first term, r is the common ratio, n is the term number
+-- Returns the nth term
 geometricSeq :: Double -> Double -> Int -> Double
-geometricSeq 
-  = undefined
+geometricSeq a r n
+  = a * r ^ fromIntegral n
 
 -- Arithmetic series
+-- Parameters: a is the first term, d is the common difference, n is the term number
+-- Returns the sum of the first n terms
 arithmeticSeries :: Double -> Double -> Int -> Double
-arithmeticSeries 
-  = undefined
+arithmeticSeries a d n
+  = (fromIntegral n + 1) * (a + (d * fromIntegral n) / 2)
 
 -- Geometric series
+-- Parameters: a is the first term, r is the common ratio, n is the term number
+-- Returns the sum of the first n terms
 geometricSeries :: Double -> Double -> Int -> Double
-geometricSeries 
-  = undefined
+geometricSeries a r n
+  | r == 1 = a * (fromIntegral n + 1)
+  | otherwise = a * ((1 - r ^ (fromIntegral n + 1)) / (1 - r))
